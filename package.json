@@ -1,9 +1,9 @@
 {
   "name": "swipe-detect-js",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A swipe detector in TypeScript",
   "main": "dist/index.js",
-  "types": "dist/swipe-detector.d.ts",
+  "types": "dist/swipe-detect-js.d.ts",
   "files": [
     "dist/**/*" 
   ],
