@@ -4,7 +4,7 @@
  * 
  * Usage example:
  * ```typescript
- * import { createSwipeDetector } from "swipe-detect";
+ * import { createSwipeDetector } from "swipe-detect-js";
  *
  * const swipeobject = document.querySelector('.swipe-object');
  * const detector = createSwipeDetector(swipeobject);
