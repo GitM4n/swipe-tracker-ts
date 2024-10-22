@@ -3,7 +3,7 @@
  *
  * Usage example:
  * ```typescript
- * import { createSwipeDetector } from "swipe-detector";
+ * import { createSwipeDetector } from "swipe-detect";
  *
  * const swipeobject = document.querySelector('.swipe-object');
  * const detector = createSwipeDetector(swipeobject);
@@ -18,6 +18,7 @@ interface SwipeDetector {
     swipeRight: (callback: () => void) => void;
     swipeUp: (callback: () => void) => void;
     swipeDown: (callback: () => void) => void;
+    removeEventListeners: () => void;
 }
 export declare function createSwipeDetector(element: HTMLElement): SwipeDetector;
 export {};

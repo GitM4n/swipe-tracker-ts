@@ -73,5 +73,10 @@ export function createSwipeDetector(element) {
         swipeDown: function (callback) {
             swipeDownCallback = callback;
         },
+        removeEventListeners: function () {
+            element.removeEventListener('touchstart', swipeStart);
+            element.removeEventListener('touchmove', swipeMove);
+            element.removeEventListener('touchend', swipeEnd);
+        }
     };
 }

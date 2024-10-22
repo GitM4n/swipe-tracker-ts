@@ -6,6 +6,7 @@ declare module 'swipe-detector' {
     swipeRight: (callback: () => void) => void;
     swipeUp: (callback: () => void) => void;
     swipeDown: (callback: () => void) => void;
+    removeEventListeners: () => void;
   }
 
   export function createSwipeDetector(element: HTMLElement): createSwipeDetectorResult;
