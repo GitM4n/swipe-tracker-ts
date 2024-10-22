@@ -1,6 +1,6 @@
-// swipe-detector.d.ts
+// swipe-detect-js.d.ts
 
-declare module 'swipe-detector' {
+declare module 'swipe-detect-js' {
   export interface createSwipeDetectorResult {
     swipeLeft: (callback: () => void) => void;
     swipeRight: (callback: () => void) => void;
