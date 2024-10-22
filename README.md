@@ -1,26 +1,23 @@
-# touchTracker
+# swipeTracker
 
-A touch tracker in TypeScript
+A swipe tracker in TypeScript
 
 ## Installation
 
-
 ```bash
-npm install touch-tracker
+npm install swipe-tracker
 
 ```
 
 ## Usage 
 
 ```ts
-  const touchTracker = createTouchTracker();
-
-  touchTracker.sensivity = 200 //set value optional, default 100
-
+  const swipeTracker = createSwipeTracker();
+  
   window.addEventListener('touchend', () => {
-    if (touchTracker.touchActive) {
-      if (touchTracker.touchDirection === 'left') {
-        console.log('Swiped left');
+    if (swipeTracker.swipeActive) {
+      if (swipeTracker.swipeDirection === 'left') {
+        // do something
       }
     }
   });
