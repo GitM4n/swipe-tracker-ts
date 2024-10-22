@@ -1,4 +1,4 @@
-export function createSwipeTracker(element) {
+export function createSwipeDetector(element) {
     var swipeActive = false;
     var sensitivity = 50;
     var swipeStartX = 0;

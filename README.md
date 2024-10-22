@@ -1,23 +1,23 @@
-# swipeTracker
+# Swipe Detector
 
-A swipe tracker in TypeScript
+A swipe detector in TypeScript
 
 ## Installation
 
 ```bash
-npm install swipe-tracker
+npm install swipe-detector
 
 ```
 
 ## Usage 
 
  ```typescript
- import { createSwipeTracker } from "swiper-tracker";
+ import { createSwipeDetector } from "swipe-detector";
  
  const swipeobject = document.querySelector('.swipe-object');
- const tracker = createSwipeTracker(swipeobject);
+ const detector = createSwipeDetector(swipeobject);
  
- tracker.swipeLeft(()=>{
+ detector.swipeLeft(()=>{
   console.log('left')
  })
  ```

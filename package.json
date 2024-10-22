@@ -1,17 +1,16 @@
 {
-  "name": "swipe-tracker",
+  "name": "swipe-detector",
   "version": "1.0.0",
   "description": "A swipe tracker in TypeScript",
   "main": "dist/index.js",
-  "types": "dist/swipe-tracker.d.ts",
+  "types": "dist/swipe-detector.d.ts",
   "files": [
     "dist/**/*" 
   ],
   "scripts": {
     "build": "tsc"
   },
-  "keywords": ["swipe", "tracker", "typescript"],
+  "keywords": ["swipe", "tracker", "detector", "typescript"],
   "author": "gitm4n",
   "license": "MIT"
 }
-

@@ -1,12 +1,12 @@
-// swipe-tracker.d.ts
+// swipe-detector.d.ts
 
-declare module 'swipe-tracker' {
-  export interface createSwipeTrackerResult {
+declare module 'swipe-detector' {
+  export interface createSwipeDetectorResult {
     swipeLeft: (callback: () => void) => void;
     swipeRight: (callback: () => void) => void;
     swipeUp: (callback: () => void) => void;
     swipeDown: (callback: () => void) => void;
   }
 
-  export function createSwipeTracker(element: HTMLElement): createSwipeTrackerResult;
+  export function createSwipeDetector(element: HTMLElement): createSwipeDetectorResult;
 }

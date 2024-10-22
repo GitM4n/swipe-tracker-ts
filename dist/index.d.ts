@@ -1,23 +1,23 @@
 /**
- * A utility for tracking swipe events on the window or a specific element.
+ * A utility for detecting swipe events on the window or a specific element.
  *
  * Usage example:
  * ```typescript
- * import { createSwipeTracker } from "swiper-tracker";
+ * import { createSwipeDetector } from "swipe-detector";
  *
  * const swipeobject = document.querySelector('.swipe-object');
- * const tracker = createSwipeTracker(swipeobject);
+ * const detector = createSwipeDetector(swipeobject);
  *
- * tracker.swipeLeft(()=>{
+ * detector.swipeLeft(()=>{
  *   console.log('left')
  * })
  * ```
  */
-interface SwipeTracker {
+interface SwipeDetector {
     swipeLeft: (callback: () => void) => void;
     swipeRight: (callback: () => void) => void;
     swipeUp: (callback: () => void) => void;
     swipeDown: (callback: () => void) => void;
 }
-export declare function createSwipeTracker(element: HTMLElement): SwipeTracker;
+export declare function createSwipeDetector(element: HTMLElement): SwipeDetector;
 export {};
