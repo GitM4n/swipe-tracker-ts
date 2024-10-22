@@ -11,16 +11,14 @@ npm install swipe-tracker
 
 ## Usage 
 
-```ts
-  const swipeTracker = createSwipeTracker();
-  
-  window.addEventListener('touchend', () => {
-    if (swipeTracker.swipeActive) {
-      if (swipeTracker.swipeDirection === 'left') {
-        // do something
-      }
-    }
-  });
-
-```
+ ```typescript
+ import { createSwipeTracker } from "swiper-tracker";
+ 
+ const swipeobject = document.querySelector('.swipe-object');
+ const tracker = createSwipeTracker(swipeobject);
+ 
+ tracker.swipeLeft(()=>{
+  console.log('left')
+ })
+ ```
 

@@ -1,13 +1,12 @@
 // swipe-tracker.d.ts
 
 declare module 'swipe-tracker' {
-  export type SwipeDirection = 'left' | 'right' | 'up' | 'down' | '';
-
   export interface createSwipeTrackerResult {
-    swipeDirection: SwipeDirection;
-    swipeActive: boolean;
-    sensitivity: number;
+    swipeLeft: (callback: () => void) => void;
+    swipeRight: (callback: () => void) => void;
+    swipeUp: (callback: () => void) => void;
+    swipeDown: (callback: () => void) => void;
   }
 
-  export function createSwipeTracker(): createSwipeTrackerResult;
+  export function createSwipeTracker(element: HTMLElement): createSwipeTrackerResult;
 }

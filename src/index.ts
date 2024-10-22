@@ -1,38 +1,27 @@
-type SwipeDirection = 'left' | 'right' | 'up' | 'down' | '';
 
 /**
- * A utility for tracking swipe events on the window.
- * It returns an object with three properties:
- * - swipeDirection: string that indicates the direction of the swipe movement (left, right, up, down, or '').
- * - swipeActive: boolean that indicates whether the swipe tracking is active or not.
- * - sensitivity: number that represents the sensitivity of the swipe tracking (default: 50).
+ * A utility for tracking swipe events on the window or a specific element.
  * 
- * The utility provides four functions to check if the swipe movement is in a specific direction:
- * - isSwipeLeft
- * - isSwipeRight
- * - isSwipeUp
- * - isSwipeDown
- * 
- * @example 
- * const swipeTracker = createSwipeTracker();
- * 
- * window.addEventListener('touchend', () => {
- *   if (swipeTracker.swipeActive) {
- *     if (swipeTracker.swipeDirection === 'left') {
- *       // do something
- *     }
- *   }
- * });
+ * Usage example:
+ * ```typescript
+ * import { createSwipeTracker } from "swiper-tracker";
+ *
+ * const swipeobject = document.querySelector('.swipe-object');
+ * const tracker = createSwipeTracker(swipeobject);
+ *
+ * tracker.swipeLeft(()=>{
+ *   console.log('left')
+ * })
+ * ```
  */
-
 interface SwipeTracker {
-  swipeDirection: SwipeDirection;
-  swipeActive: boolean;
-  sensitivity: number;
+  swipeLeft: (callback: () => void) => void;
+  swipeRight: (callback: () => void) => void;
+  swipeUp: (callback: () => void) => void;
+  swipeDown: (callback: () => void) => void;
 }
 
-export function createSwipeTracker(): SwipeTracker {
-  let swipeDirection: SwipeDirection = '';
+export function createSwipeTracker(element: HTMLElement): SwipeTracker {
   let swipeActive = false;
   let sensitivity = 50;
 
@@ -40,6 +29,11 @@ export function createSwipeTracker(): SwipeTracker {
   let swipeStartY = 0;
   let swipeCurrentX = 0;
   let swipeCurrentY = 0;
+
+  let swipeLeftCallback: () => void = () => {};
+  let swipeRightCallback: () => void = () => {};
+  let swipeUpCallback: () => void = () => {};
+  let swipeDownCallback: () => void = () => {};
 
   function swipeStart(event: TouchEvent): void {
     reset();
@@ -56,56 +50,65 @@ export function createSwipeTracker(): SwipeTracker {
     }
 
     swipeActive = true;
+  }
 
-    if (isswipeLeft()) {
-      swipeDirection = 'left';
-    } else if (isswipeRight()) {
-      swipeDirection = 'right';
-    } else if (isswipeUp()) {
-      swipeDirection = 'up';
-    } else if (isswipeDown()) {
-      swipeDirection = 'down';
+  function swipeEnd(): void {
+    if (swipeActive) {
+      if (isSwipeLeft()) {
+        swipeLeftCallback(); 
+      }
+      else if (isSwipeRight()) {
+        swipeRightCallback(); 
+      }
+      else if (isSwipeUp()) {
+        swipeUpCallback();   
+      }
+      else if (isSwipeDown()) {
+        swipeDownCallback(); 
+      }
     }
+    reset();
   }
 
   function reset(): void {
     swipeCurrentX = 0;
     swipeCurrentY = 0;
-    swipeDirection = '';
     swipeActive = false;
   }
 
-  function isswipeLeft(): boolean {
+  function isSwipeLeft(): boolean {
     return swipeCurrentX + sensitivity < swipeStartX;
   }
 
-  function isswipeRight(): boolean {
+  function isSwipeRight(): boolean {
     return swipeCurrentX - sensitivity > swipeStartX;
   }
 
-  function isswipeUp(): boolean {
+  function isSwipeUp(): boolean {
     return swipeStartY - sensitivity > swipeCurrentY;
   }
 
-  function isswipeDown(): boolean {
+  function isSwipeDown(): boolean {
     return swipeStartY + sensitivity < swipeCurrentY;
   }
 
-  window.addEventListener('touchstart', swipeStart);
-  window.addEventListener('touchmove', swipeMove);
+  element.addEventListener('touchstart', swipeStart);
+  element.addEventListener('touchmove', swipeMove);
+  element.addEventListener('touchend', swipeEnd);
 
+  // Return the object with methods to set the callbacks
   return {
-    get swipeDirection(): SwipeDirection {
-      return swipeDirection;
+    swipeLeft(callback: () => void): void {
+      swipeLeftCallback = callback;
     },
-    get swipeActive(): boolean {
-      return swipeActive;
+    swipeRight(callback: () => void): void {
+      swipeRightCallback = callback;
     },
-    get sensitivity(): number {
-      return sensitivity;
+    swipeUp(callback: () => void): void {
+      swipeUpCallback = callback;
     },
-    set sensitivity(value: number) {
-      sensitivity = value;
-    }
+    swipeDown(callback: () => void): void {
+      swipeDownCallback = callback;
+    },
   };
 }

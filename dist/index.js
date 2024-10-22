@@ -1,11 +1,14 @@
-export function createSwipeTracker() {
-    var swipeDirection = '';
+export function createSwipeTracker(element) {
     var swipeActive = false;
     var sensitivity = 50;
     var swipeStartX = 0;
     var swipeStartY = 0;
     var swipeCurrentX = 0;
     var swipeCurrentY = 0;
+    var swipeLeftCallback = function () { };
+    var swipeRightCallback = function () { };
+    var swipeUpCallback = function () { };
+    var swipeDownCallback = function () { };
     function swipeStart(event) {
         reset();
         swipeStartX = event.touches[0].clientX;
@@ -18,51 +21,57 @@ export function createSwipeTracker() {
             return;
         }
         swipeActive = true;
-        if (isswipeLeft()) {
-            swipeDirection = 'left';
+    }
+    function swipeEnd() {
+        if (swipeActive) {
+            if (isSwipeLeft()) {
+                swipeLeftCallback();
+            }
+            else if (isSwipeRight()) {
+                swipeRightCallback();
+            }
+            else if (isSwipeUp()) {
+                swipeUpCallback();
+            }
+            else if (isSwipeDown()) {
+                swipeDownCallback();
+            }
         }
-        else if (isswipeRight()) {
-            swipeDirection = 'right';
-        }
-        else if (isswipeUp()) {
-            swipeDirection = 'up';
-        }
-        else if (isswipeDown()) {
-            swipeDirection = 'down';
-        }
+        reset();
     }
     function reset() {
         swipeCurrentX = 0;
         swipeCurrentY = 0;
-        swipeDirection = '';
         swipeActive = false;
     }
-    function isswipeLeft() {
+    function isSwipeLeft() {
         return swipeCurrentX + sensitivity < swipeStartX;
     }
-    function isswipeRight() {
+    function isSwipeRight() {
         return swipeCurrentX - sensitivity > swipeStartX;
     }
-    function isswipeUp() {
+    function isSwipeUp() {
         return swipeStartY - sensitivity > swipeCurrentY;
     }
-    function isswipeDown() {
+    function isSwipeDown() {
         return swipeStartY + sensitivity < swipeCurrentY;
     }
-    window.addEventListener('touchstart', swipeStart);
-    window.addEventListener('touchmove', swipeMove);
+    element.addEventListener('touchstart', swipeStart);
+    element.addEventListener('touchmove', swipeMove);
+    element.addEventListener('touchend', swipeEnd);
+    // Return the object with methods to set the callbacks
     return {
-        get swipeDirection() {
-            return swipeDirection;
+        swipeLeft: function (callback) {
+            swipeLeftCallback = callback;
         },
-        get swipeActive() {
-            return swipeActive;
+        swipeRight: function (callback) {
+            swipeRightCallback = callback;
         },
-        get sensitivity() {
-            return sensitivity;
+        swipeUp: function (callback) {
+            swipeUpCallback = callback;
         },
-        set sensitivity(value) {
-            sensitivity = value;
-        }
+        swipeDown: function (callback) {
+            swipeDownCallback = callback;
+        },
     };
 }
