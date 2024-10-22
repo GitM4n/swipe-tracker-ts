@@ -1,105 +1,105 @@
-type TouchDirection = 'left' | 'right' | 'up' | 'down' | '';
+type SwipeDirection = 'left' | 'right' | 'up' | 'down' | '';
 
 /**
- * A utility for tracking touch events on the window.
+ * A utility for tracking swipe events on the window.
  * It returns an object with three properties:
- * - touchDirection: string that indicates the direction of the touch movement (left, right, up, down, or '').
- * - touchActive: boolean that indicates whether the touch tracking is active or not.
- * - sensitivity: number that represents the sensitivity of the touch tracking (default: 50).
+ * - swipeDirection: string that indicates the direction of the swipe movement (left, right, up, down, or '').
+ * - swipeActive: boolean that indicates whether the swipe tracking is active or not.
+ * - sensitivity: number that represents the sensitivity of the swipe tracking (default: 50).
  * 
- * The utility provides four functions to check if the touch movement is in a specific direction:
- * - isTouchLeft
- * - isTouchRight
- * - isTouchUp
- * - isTouchDown
+ * The utility provides four functions to check if the swipe movement is in a specific direction:
+ * - isSwipeLeft
+ * - isSwipeRight
+ * - isSwipeUp
+ * - isSwipeDown
  * 
  * @example 
- * const touchTracker = createTouchTracker();
+ * const swipeTracker = createSwipeTracker();
  * 
  * window.addEventListener('touchend', () => {
- *   if (touchTracker.touchActive) {
- *     if (touchTracker.touchDirection === 'left') {
+ *   if (swipeTracker.swipeActive) {
+ *     if (swipeTracker.swipeDirection === 'left') {
  *       // do something
  *     }
  *   }
  * });
  */
 
-interface TouchTracker {
-  touchDirection: TouchDirection;
-  touchActive: boolean;
+interface SwipeTracker {
+  swipeDirection: SwipeDirection;
+  swipeActive: boolean;
   sensitivity: number;
 }
 
-export function createTouchTracker(): TouchTracker {
-  let touchDirection: TouchDirection = '';
-  let touchActive = false;
+export function createSwipeTracker(): SwipeTracker {
+  let swipeDirection: SwipeDirection = '';
+  let swipeActive = false;
   let sensitivity = 50;
 
-  let touchStartX = 0;
-  let touchStartY = 0;
-  let touchCurrentX = 0;
-  let touchCurrentY = 0;
+  let swipeStartX = 0;
+  let swipeStartY = 0;
+  let swipeCurrentX = 0;
+  let swipeCurrentY = 0;
 
-  function touchStart(event: TouchEvent): void {
+  function swipeStart(event: TouchEvent): void {
     reset();
-    touchStartX = event.touches[0].clientX;
-    touchStartY = event.touches[0].clientY;
+    swipeStartX = event.touches[0].clientX;
+    swipeStartY = event.touches[0].clientY;
   }
 
-  function touchMove(event: TouchEvent): void {
-    touchCurrentX = event.touches[0].clientX;
-    touchCurrentY = event.touches[0].clientY;
+  function swipeMove(event: TouchEvent): void {
+    swipeCurrentX = event.touches[0].clientX;
+    swipeCurrentY = event.touches[0].clientY;
 
-    if (Math.abs(touchStartX - touchCurrentX) < sensitivity && Math.abs(touchStartY - touchCurrentY) < sensitivity) {
+    if (Math.abs(swipeStartX - swipeCurrentX) < sensitivity && Math.abs(swipeStartY - swipeCurrentY) < sensitivity) {
       return;
     }
 
-    touchActive = true;
+    swipeActive = true;
 
-    if (isTouchLeft()) {
-      touchDirection = 'left';
-    } else if (isTouchRight()) {
-      touchDirection = 'right';
-    } else if (isTouchUp()) {
-      touchDirection = 'up';
-    } else if (isTouchDown()) {
-      touchDirection = 'down';
+    if (isswipeLeft()) {
+      swipeDirection = 'left';
+    } else if (isswipeRight()) {
+      swipeDirection = 'right';
+    } else if (isswipeUp()) {
+      swipeDirection = 'up';
+    } else if (isswipeDown()) {
+      swipeDirection = 'down';
     }
   }
 
   function reset(): void {
-    touchCurrentX = 0;
-    touchCurrentY = 0;
-    touchDirection = '';
-    touchActive = false;
+    swipeCurrentX = 0;
+    swipeCurrentY = 0;
+    swipeDirection = '';
+    swipeActive = false;
   }
 
-  function isTouchLeft(): boolean {
-    return touchCurrentX + sensitivity < touchStartX;
+  function isswipeLeft(): boolean {
+    return swipeCurrentX + sensitivity < swipeStartX;
   }
 
-  function isTouchRight(): boolean {
-    return touchCurrentX - sensitivity > touchStartX;
+  function isswipeRight(): boolean {
+    return swipeCurrentX - sensitivity > swipeStartX;
   }
 
-  function isTouchUp(): boolean {
-    return touchStartY - sensitivity > touchCurrentY;
+  function isswipeUp(): boolean {
+    return swipeStartY - sensitivity > swipeCurrentY;
   }
 
-  function isTouchDown(): boolean {
-    return touchStartY + sensitivity < touchCurrentY;
+  function isswipeDown(): boolean {
+    return swipeStartY + sensitivity < swipeCurrentY;
   }
 
-  window.addEventListener('touchstart', touchStart);
-  window.addEventListener('touchmove', touchMove);
+  window.addEventListener('touchstart', swipeStart);
+  window.addEventListener('touchmove', swipeMove);
 
   return {
-    get touchDirection(): TouchDirection {
-      return touchDirection;
+    get swipeDirection(): SwipeDirection {
+      return swipeDirection;
     },
-    get touchActive(): boolean {
-      return touchActive;
+    get swipeActive(): boolean {
+      return swipeActive;
     },
     get sensitivity(): number {
       return sensitivity;

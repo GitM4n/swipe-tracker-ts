@@ -1,16 +1,16 @@
 {
-  "name": "touch-tracker",
-  "version": "1.1.2",
-  "description": "A touch tracker in TypeScript",
+  "name": "swipe-tracker",
+  "version": "1.0.0",
+  "description": "A swipe tracker in TypeScript",
   "main": "dist/index.js",
-  "types": "dist/touch-tracker.d.ts",
+  "types": "dist/swipe-tracker.d.ts",
   "files": [
     "dist/**/*" 
   ],
   "scripts": {
     "build": "tsc"
   },
-  "keywords": ["touch", "tracker", "typescript"],
+  "keywords": ["swipe", "tracker", "typescript"],
   "author": "gitm4n",
   "license": "MIT"
 }

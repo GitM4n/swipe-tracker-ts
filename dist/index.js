@@ -1,62 +1,62 @@
-export function createTouchTracker() {
-    var touchDirection = '';
-    var touchActive = false;
+export function createSwipeTracker() {
+    var swipeDirection = '';
+    var swipeActive = false;
     var sensitivity = 50;
-    var touchStartX = 0;
-    var touchStartY = 0;
-    var touchCurrentX = 0;
-    var touchCurrentY = 0;
-    function touchStart(event) {
+    var swipeStartX = 0;
+    var swipeStartY = 0;
+    var swipeCurrentX = 0;
+    var swipeCurrentY = 0;
+    function swipeStart(event) {
         reset();
-        touchStartX = event.touches[0].clientX;
-        touchStartY = event.touches[0].clientY;
+        swipeStartX = event.touches[0].clientX;
+        swipeStartY = event.touches[0].clientY;
     }
-    function touchMove(event) {
-        touchCurrentX = event.touches[0].clientX;
-        touchCurrentY = event.touches[0].clientY;
-        if (Math.abs(touchStartX - touchCurrentX) < sensitivity && Math.abs(touchStartY - touchCurrentY) < sensitivity) {
+    function swipeMove(event) {
+        swipeCurrentX = event.touches[0].clientX;
+        swipeCurrentY = event.touches[0].clientY;
+        if (Math.abs(swipeStartX - swipeCurrentX) < sensitivity && Math.abs(swipeStartY - swipeCurrentY) < sensitivity) {
             return;
         }
-        touchActive = true;
-        if (isTouchLeft()) {
-            touchDirection = 'left';
+        swipeActive = true;
+        if (isswipeLeft()) {
+            swipeDirection = 'left';
         }
-        else if (isTouchRight()) {
-            touchDirection = 'right';
+        else if (isswipeRight()) {
+            swipeDirection = 'right';
         }
-        else if (isTouchUp()) {
-            touchDirection = 'up';
+        else if (isswipeUp()) {
+            swipeDirection = 'up';
         }
-        else if (isTouchDown()) {
-            touchDirection = 'down';
+        else if (isswipeDown()) {
+            swipeDirection = 'down';
         }
     }
     function reset() {
-        touchCurrentX = 0;
-        touchCurrentY = 0;
-        touchDirection = '';
-        touchActive = false;
+        swipeCurrentX = 0;
+        swipeCurrentY = 0;
+        swipeDirection = '';
+        swipeActive = false;
     }
-    function isTouchLeft() {
-        return touchCurrentX + sensitivity < touchStartX;
+    function isswipeLeft() {
+        return swipeCurrentX + sensitivity < swipeStartX;
     }
-    function isTouchRight() {
-        return touchCurrentX - sensitivity > touchStartX;
+    function isswipeRight() {
+        return swipeCurrentX - sensitivity > swipeStartX;
     }
-    function isTouchUp() {
-        return touchStartY - sensitivity > touchCurrentY;
+    function isswipeUp() {
+        return swipeStartY - sensitivity > swipeCurrentY;
     }
-    function isTouchDown() {
-        return touchStartY + sensitivity < touchCurrentY;
+    function isswipeDown() {
+        return swipeStartY + sensitivity < swipeCurrentY;
     }
-    window.addEventListener('touchstart', touchStart);
-    window.addEventListener('touchmove', touchMove);
+    window.addEventListener('touchstart', swipeStart);
+    window.addEventListener('touchmove', swipeMove);
     return {
-        get touchDirection() {
-            return touchDirection;
+        get swipeDirection() {
+            return swipeDirection;
         },
-        get touchActive() {
-            return touchActive;
+        get swipeActive() {
+            return swipeActive;
         },
         get sensitivity() {
             return sensitivity;
