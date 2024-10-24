@@ -16,7 +16,7 @@
  * import { createSwipeDetector } from "swipe-detect-js";
  *
  * const swipeobject = document.querySelector('.swipe-object');
- * const detector = createSwipeDetector(swipeobject, { sensitivity: 100 }); // Sensitivity is optional
+ * const detector = createSwipeDetector(swipeobject, options: { sensitivity: 100 }); // Sensitivity is optional
  *
  * detector.swipeLeft(() => {
  *   console.log('Swiped left');
@@ -61,20 +61,6 @@
  *   - Re-attaches event listeners to the target element. Use this method after calling
  *     `removeEventListeners()` to resume swipe detection.
  *
- * ### Example:
- *
- * ```typescript
- * const swipeDetector = createSwipeDetector(document.body, { sensitivity: 80 });
- *
- * swipeDetector.swipeLeft(() => {
- *   console.log('Detected swipe left');
- * });
- *
- * swipeDetector.swipeRight(() => {
- *   console.log('Detected swipe right');
- * });
- * ```
- *
  * ### Notes:
  * - The swipe detection is based on touch events (`touchstart`, `touchmove`, and `touchend`), making it
  *   ideal for mobile devices and touch-screen interfaces. It won't work on non-touch devices unless
@@ -90,13 +76,13 @@
  * @param sensitivity - (Optional) The sensitivity level for swipe detection, default is 50 pixels.
  * @returns SwipeDetector - An object containing methods to register swipe callbacks and manage event listeners.
  */
-export function createSwipeDetector(element, _a) {
-    var _b = _a.sensitivity, sensitivity = _b === void 0 ? 50 : _b;
+export function createSwipeDetector(element, options) {
     var swipeActive = false;
     var swipeStartX = 0;
     var swipeStartY = 0;
     var swipeCurrentX = 0;
     var swipeCurrentY = 0;
+    var sensitivity = (options === null || options === void 0 ? void 0 : options.sensitivity) || 50;
     var swipeLeftCallback = function () { };
     var swipeRightCallback = function () { };
     var swipeUpCallback = function () { };

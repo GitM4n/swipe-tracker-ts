@@ -16,7 +16,7 @@
  * import { createSwipeDetector } from "swipe-detect-js";
  *
  * const swipeobject = document.querySelector('.swipe-object');
- * const detector = createSwipeDetector(swipeobject, { sensitivity: 100 }); // Sensitivity is optional
+ * const detector = createSwipeDetector(swipeobject, options: { sensitivity: 100 }); // Sensitivity is optional
  *
  * detector.swipeLeft(() => {
  *   console.log('Swiped left');
@@ -61,20 +61,6 @@
  *   - Re-attaches event listeners to the target element. Use this method after calling
  *     `removeEventListeners()` to resume swipe detection.
  *
- * ### Example:
- *
- * ```typescript
- * const swipeDetector = createSwipeDetector(document.body, { sensitivity: 80 });
- *
- * swipeDetector.swipeLeft(() => {
- *   console.log('Detected swipe left');
- * });
- *
- * swipeDetector.swipeRight(() => {
- *   console.log('Detected swipe right');
- * });
- * ```
- *
  * ### Notes:
  * - The swipe detection is based on touch events (`touchstart`, `touchmove`, and `touchend`), making it
  *   ideal for mobile devices and touch-screen interfaces. It won't work on non-touch devices unless
@@ -98,7 +84,7 @@ interface SwipeDetector {
     removeEventListeners: () => void;
     addEventListeners: () => void;
 }
-export declare function createSwipeDetector(element: HTMLElement, { sensitivity }: {
+export declare function createSwipeDetector(element: HTMLElement, options?: {
     sensitivity?: number;
 }): SwipeDetector;
 export {};

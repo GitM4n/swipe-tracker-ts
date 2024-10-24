@@ -18,7 +18,7 @@ event listeners dynamically (adding/removing) based on the interaction requireme
 import { createSwipeDetector } from "swipe-detect-js";
 
 const swipeobject = document.querySelector(".swipe-object");
-const detector = createSwipeDetector(swipeobject, { sensitivity: 100 }); // Sensitivity is optional
+const detector = createSwipeDetector(swipeobject, options: { sensitivity: 100 }); // Sensitivity is optional
 
 detector.swipeLeft(() => {
   console.log("Swiped left");
